@@ -5,8 +5,7 @@ An enterprise-grade, end-to-end Industrial IoT (IIoT) edge framework designed to
 The architecture features an **ESP32 microcontroller edge node** capable of high-frequency waveform processing, which interfaces with a localized, containerized cloud infrastructure stack (**Telegraf, Mosquitto MQTT, InfluxDB, and Grafana**). For testing scenarios where physical hardware components are unavailable, the project includes a concurrent, production-grade **headless Python simulation and web dashboard system** that models complex household load profiles, validates broker routing configurations, logs historical telemetry to disk, and outputs structured analytical PDF reports.
 
 ---
-
- ## 🏗️ System Architecture & Data Pipeline
+## 🏗️ System Architecture & Data Pipeline
 
 The system functions as a localized SCADA (Supervisory Control and Data Acquisition) grid framework mapped across an industry-standard data pipeline.
 
@@ -26,6 +25,7 @@ graph TD
     Broker --> Pipeline
     Pipeline --> Database
     Database --> Visual
+    ```
 ---
 
 ## ✨ System Features
