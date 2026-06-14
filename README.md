@@ -8,22 +8,37 @@ The architecture features an **ESP32 microcontroller edge node** capable of high
 
 ## 🏗️ System Architecture & Data Pipeline
 
-The system functions as a localized SCADA (Supervisory Control and Data Acquisition) grid framework mapped across three distinct structural layers:
+The system functions as a localized SCADA (Supervisory Control and Data Acquisition) grid framework mapped across an industry-standard data pipeline. 
 
-[INPUT LAYER: CT Clamps / Grid Waveforms]
-│
-▼
-[EDGE PROCESSING: ESP32 Node / Python Core Engine] ──(True RMS & Noise Gating)──► [Safety Cutoff Relay]
-│
-▼ (Serialized JSON Payloads via MQTT Protocol)
-[INGESTION LINE: Mosquitto Broker Mesh Network]
-│
-▼
-[PERSISTENCE MATRIX: Telegraf Pipeline Router ──► InfluxDB Time-Series Metric Store]
-│
-▼
-[VISUALIZATION: Streamlit UI Frontend Grid / Grafana Analytical Panel Boards]
 
+
+```mermaid
+graph TD
+    %% Define System Nodes
+    Input[INPUT LAYER: CT Clamps / Grid Waveforms]
+    Edge[EDGE PROCESSING: ESP32 Node / Python Core]
+    Relay[SAFETY ACTUATOR: Cutoff Relay Switch]
+    Broker[INGESTION LINE: Mosquitto MQTT Broker]
+    Pipeline[DATA ROUTER: Telegraf Parser Engine]
+    Database[PERSISTENCE MATRIX: InfluxDB Time-Series]
+    Visual[VISUALIZATION: Streamlit Grid / Grafana]
+
+    %% Define Node Architecture Flow
+    Input -->|Raw AC Waveforms| Edge
+    Edge -->|True RMS / Noise Gating| Relay
+    Edge -->|Serialized JSON Payloads| Broker
+    Broker -->|Asynchronous Message Streams| Pipeline
+    Pipeline -->|Structured Metrics Ingestion| Database
+    Database -->|Live Query Feeds| Visual
+
+    %% Style Configurations
+    style Input fill:#1A365D,stroke:#333,stroke-width:2px,color:#fff
+    style Edge fill:#2B6CB0,stroke:#333,stroke-width:2px,color:#fff
+    style Relay fill:#9B2C2C,stroke:#333,stroke-width:2px,color:#fff
+    style Broker fill:#D69E2E,stroke:#333,stroke-width:2px,color:#fff
+    style Pipeline fill:#4A5568,stroke:#333,stroke-width:2px,color:#fff
+    style Database fill:#2F855A,stroke:#333,stroke-width:2px,color:#fff
+    style Visual fill:#2C5282,stroke:#333,stroke-width:2px,color:#fff
 
 ---
 
@@ -55,7 +70,7 @@ Smart-Home-Energy-Monitoring-System/
 ├── data/                         # Local Historical CSV Database Dumps [Git Ignored]
 ├── reports/                      # Compiled Analytics PDF Consumer Files [Git Ignored]
 └── README.md                     # Repository Landing Presentation Page
-
+```
 ---
 
 ---
