@@ -6,15 +6,12 @@ The architecture features an **ESP32 microcontroller edge node** capable of high
 
 ---
 
-## 🏗️ System Architecture & Data Pipeline
+ ## 🏗️ System Architecture & Data Pipeline
 
-The system functions as a localized SCADA (Supervisory Control and Data Acquisition) grid framework mapped across an industry-standard data pipeline. 
-
-
+The system functions as a localized SCADA (Supervisory Control and Data Acquisition) grid framework mapped across an industry-standard data pipeline.
 
 ```mermaid
 graph TD
-    %% Define System Nodes
     Input[INPUT LAYER: CT Clamps / Grid Waveforms]
     Edge[EDGE PROCESSING: ESP32 Node / Python Core]
     Relay[SAFETY ACTUATOR: Cutoff Relay Switch]
@@ -23,23 +20,12 @@ graph TD
     Database[PERSISTENCE MATRIX: InfluxDB Time-Series]
     Visual[VISUALIZATION: Streamlit Grid / Grafana]
 
-    %% Define Node Architecture Flow
-    Input -->|Raw AC Waveforms| Edge
-    Edge -->|True RMS / Noise Gating| Relay
-    Edge -->|Serialized JSON Payloads| Broker
-    Broker -->|Asynchronous Message Streams| Pipeline
-    Pipeline -->|Structured Metrics Ingestion| Database
-    Database -->|Live Query Feeds| Visual
-
-    %% Style Configurations
-    style Input fill:#1A365D,stroke:#333,stroke-width:2px,color:#fff
-    style Edge fill:#2B6CB0,stroke:#333,stroke-width:2px,color:#fff
-    style Relay fill:#9B2C2C,stroke:#333,stroke-width:2px,color:#fff
-    style Broker fill:#D69E2E,stroke:#333,stroke-width:2px,color:#fff
-    style Pipeline fill:#4A5568,stroke:#333,stroke-width:2px,color:#fff
-    style Database fill:#2F855A,stroke:#333,stroke-width:2px,color:#fff
-    style Visual fill:#2C5282,stroke:#333,stroke-width:2px,color:#fff
-
+    Input --> Edge
+    Edge --> Relay
+    Edge --> Broker
+    Broker --> Pipeline
+    Pipeline --> Database
+    Database --> Visual
 ---
 
 ## ✨ System Features
