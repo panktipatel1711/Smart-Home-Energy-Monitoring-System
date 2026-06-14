@@ -1,0 +1,18 @@
+# Python bytecode caching filters
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local database logs and generated telemetry outputs
+data/historical_energy_log.csv
+reports/energy_consumption_report.pdf
+
+# Embedded Systems compiler builds
+.pio/
+.clang_complete
+.gcc-flags.json
+
+# Infrastructure tracking variables
+.env
